@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ceren Mıhcı | Industrial Engineering</title>
+<meta name="description" content="Portfolio of Ceren Mıhcı, Industrial Engineering student at Yaşar University: education, projects and skills.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,650&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --surface: #ffffff;
+    --ink: #1d2327;
+    --muted: #5d676d;
+    --line: #e6e1d8;
+    --accent: #1f6f6b;
+    --accent-soft: #e3f0ee;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 20px; }
+
+  /* Nav */
+  nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(250, 248, 244, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .logo { font-family: "Fraunces", serif; font-weight: 650; font-size: 1.2rem; color: var(--ink); }
+  .links { display: flex; gap: 22px; font-size: 0.93rem; }
+  .links a { color: var(--muted); }
+  .links a:hover { color: var(--accent); text-decoration: none; }
+
+  /* Hero */
+  .hero { padding: 84px 0 64px; }
+  .eyebrow {
+    display: inline-block; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
+    padding: 6px 12px; border-radius: 99px; margin-bottom: 22px;
+  }
+  .hero h1 {
+    font-family: "Fraunces", serif; font-weight: 650;
+    font-size: clamp(2.4rem, 6vw, 3.8rem); line-height: 1.08; margin-bottom: 18px;
+  }
+  .hero p { max-width: 640px; color: var(--muted); font-size: 1.08rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+  .btn {
+    display: inline-block; padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 0.95rem;
+    border: 1px solid var(--accent);
+  }
+  .btn.primary { background: var(--accent); color: #fff; }
+  .btn.ghost { color: var(--accent); background: transparent; }
+  .btn:hover { text-decoration: none; opacity: 0.88; }
+
+  /* Sections */
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 {
+    font-family: "Fraunces", serif; font-weight: 650; font-size: 1.9rem; margin-bottom: 28px;
+  }
+  h3 { font-size: 1.06rem; font-weight: 600; }
+  .muted { color: var(--muted); }
+
+  /* Education */
+  .edu {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  }
+  .tag {
+    display: inline-block; margin-top: 10px; font-size: 0.82rem; font-weight: 600;
+    color: var(--accent); background: var(--accent-soft); padding: 4px 10px; border-radius: 99px;
+  }
+  .date { color: var(--muted); font-size: 0.9rem; white-space: nowrap; }
+
+  /* Projects */
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 22px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+    overflow: hidden; display: flex; flex-direction: column;
+  }
+  .media { aspect-ratio: 16 / 9; background: var(--accent-soft); position: relative; }
+  .media img, .media video, .media iframe { width: 100%; height: 100%; object-fit: cover; display: block; border: 0; }
+  .media img, .media video, .media iframe { position: relative; z-index: 1; }
+  .placeholder {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 0.85rem; font-weight: 500; text-align: center; padding: 16px;
+  }
+  .card-body { padding: 20px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .card-body .date { font-size: 0.82rem; }
+  .card-body p { font-size: 0.94rem; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
+  .chip { font-size: 0.76rem; border: 1px solid var(--line); border-radius: 99px; padding: 3px 9px; color: var(--muted); }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+  .skill-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .skill-box h3 { margin-bottom: 12px; }
+
+  /* Lists */
+  ul.plain { list-style: none; display: grid; gap: 10px; }
+  ul.plain li { padding-left: 18px; position: relative; }
+  ul.plain li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+  .two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 36px; }
+
+  /* Contact */
+  .contact-list { display: grid; gap: 10px; font-size: 1rem; }
+  footer { padding: 30px 0 40px; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
+
+  @media (max-width: 640px) {
+    .links { display: none; }
+    .hero { padding: 56px 0 44px; }
+    section { padding: 44px 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="logo">Ceren Mıhcı</a>
+    <div class="links">
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow">Industrial Engineering Student</span>
+    <h1>Hi, I'm Ceren.<br>I make processes work better.</h1>
+    <p>Industrial Engineering student at Yaşar University on a 100% scholarship, with project experience in production
+      planning, process improvement, operations research and data analysis. I'm looking for a summer internship where I can
+      apply these skills to real operations.</p>
+    <div class="actions">
+      <a class="btn primary" href="Ceren_Mihci_CV.pdf" target="_blank">Download CV</a>
+      <a class="btn ghost" href="#projects">See my projects</a>
+    </div>
+  </div>
+</header>
+
+<section id="education">
+  <div class="wrap">
+    <h2>Education</h2>
+    <div class="edu">
+      <div>
+        <h3>B.Sc. in Industrial Engineering</h3>
+        <div class="muted">Yaşar University, İzmir, Turkey</div>
+        <span class="tag">100% Scholarship</span>
+      </div>
+      <div class="date">Sep 2022 – Present</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <div class="grid">
+
+      <!-- To add a photo: put it in the images folder with this exact name -->
+      <article class="card">
+        <div class="media">
+          <div class="placeholder">Add image: images/optimization.jpg</div>
+          <img src="images/optimization.jpg" alt="Production optimization model" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+          <span class="date">May 2025 – Jun 2025</span>
+          <h3>Production Optimization (Linear Programming)</h3>
+          <p>Formulated and solved production optimization models in LINGO and Excel Solver, analyzing resource constraints to support profit maximization decisions.</p>
+          <div class="chips"><span class="chip">LINGO</span><span class="chip">Excel Solver</span><span class="chip">Operations Research</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="media">
+          <div class="placeholder">Add image: images/time-study.jpg</div>
+          <img src="images/time-study.jpg" alt="Time study on a packaging process" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+          <span class="date">May 2025 – Jun 2025</span>
+          <h3>Time Study on Makeup Product Packaging</h3>
+          <p>Collected cycle time data on a packaging process, calculated normal and standard times, and identified process inefficiencies.</p>
+          <div class="chips"><span class="chip">Time Study</span><span class="chip">Statistics</span><span class="chip">Process Improvement</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="media">
+          <div class="placeholder">Add image: images/engineering-economics.jpg</div>
+          <img src="images/engineering-economics.jpg" alt="Engineering economics analysis" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+          <span class="date">Mar 2025 – Jun 2025</span>
+          <h3>Engineering Economics Analysis</h3>
+          <p>Evaluated two boiler system alternatives for a hospital using NPW, AEW and IRR in Excel and recommended the most cost-effective option.</p>
+          <div class="chips"><span class="chip">NPW</span><span class="chip">AEW</span><span class="chip">IRR</span><span class="chip">Excel</span></div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="media">
+          <div class="placeholder">Add image: images/business-plan.jpg</div>
+          <img src="images/business-plan.jpg" alt="Wearable health device business plan" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+          <span class="date">Apr 2025 – Jun 2025</span>
+          <h3>Startup Business Plan: Wearable Health Device</h3>
+          <p>Developed a business model canvas, customer segment analysis and financial estimations, and pitched the concept in an entrepreneurship setting.</p>
+          <div class="chips"><span class="chip">Business Model Canvas</span><span class="chip">Financial Planning</span></div>
+        </div>
+      </article>
+
+      <!-- Video card: to show a YouTube video, replace this media block with:
+           <div class="media"><iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe></div>
+           For a small video file instead: <div class="media"><video src="images/airlink.mp4" controls></video></div> -->
+      <article class="card">
+        <div class="media">
+          <div class="placeholder">Add image or video: images/airlink.jpg</div>
+          <img src="images/airlink.jpg" alt="AirLink drone logistics concept" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+          <span class="date">Oct 2025</span>
+          <h3>Vodafone Future Challenge 2025: AirLink</h3>
+          <p>Co-developed AirLink, a 5G-enabled drone logistics concept, contributing to system architecture, business model design and the pitch.</p>
+          <div class="chips"><span class="chip">5G</span><span class="chip">Drone Logistics</span><span class="chip">Teamwork</span></div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div class="skill-box">
+        <h3>Technical</h3>
+        <ul class="plain">
+          <li>Linear Programming &amp; Optimization</li>
+          <li>Operations Research</li>
+          <li>Production Planning</li>
+          <li>Time Study &amp; Work Measurement</li>
+          <li>Process Improvement</li>
+          <li>Statistical &amp; Data Analysis</li>
+          <li>Engineering Economics (NPW, AEW, IRR)</li>
+        </ul>
+      </div>
+      <div class="skill-box">
+        <h3>Software</h3>
+        <ul class="plain">
+          <li>Microsoft Excel (Solver, Pivot Tables, Data Analysis ToolPak)</li>
+          <li>LINGO</li>
+          <li>Python</li>
+        </ul>
+      </div>
+      <div class="skill-box">
+        <h3>Languages</h3>
+        <ul class="plain">
+          <li>Turkish (Native)</li>
+          <li>English (Upper-Intermediate, B2)</li>
+          <li>Spanish (Beginner, A1)</li>
+          <li>Korean (Beginner, A1)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certificates">
+  <div class="wrap two-col">
+    <div>
+      <h2>Certificates</h2>
+      <ul class="plain">
+        <li>Next Gen Academy Certificate – SOCAR Türkiye</li>
+        <li>Excel Training Program – BTK Akademi</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Activities</h2>
+      <ul class="plain">
+        <li>Sector Days ’25 – Vodafone: Sector Shaping the Future, Yaşar University (Mar 2025)</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <div class="contact-list">
+      <div>Email: <a href="mailto:cerenmiihci@gmail.com">cerenmiihci@gmail.com</a></div>
+      <div>LinkedIn: <a href="https://www.linkedin.com/in/ceren-m%C4%B1hc%C4%B1-1845912a0" target="_blank">linkedin.com/in/ceren-mıhcı-1845912a0</a></div>
+      <div class="muted">Bornova, İzmir, Turkey</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Ceren Mıhcı</div>
+</footer>
+
+</body>
+</html>
