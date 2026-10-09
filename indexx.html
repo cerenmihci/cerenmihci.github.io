@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ceren Mıhcı | Industrial Engineering</title>
+<meta name="description" content="Ceren Mıhcı, Industrial Engineering student at Yaşar University. Interactive portfolio: run my linear programming, time study and engineering economics projects live.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f1ea;
+    --card: #fffdf8;
+    --ink: #14213d;
+    --muted: #5b6475;
+    --line: #d9d3c4;
+    --grid: rgba(20, 33, 61, 0.055);
+    --accent: #e8590c;
+    --accent-soft: #fde6d6;
+    --teal: #1f6f6b;
+    --teal-soft: #dcebe8;
+    --radius: 16px;
+    --mono: "IBM Plex Mono", ui-monospace, monospace;
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    color: var(--ink);
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  .mono { font-family: var(--mono); }
+
+  /* ---------- Nav ---------- */
+  nav {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(244, 241, 234, 0.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 62px; }
+  .logo { font-family: var(--display); font-weight: 800; font-size: 1.15rem; text-decoration: none; letter-spacing: -0.01em; }
+  .logo span { color: var(--accent); }
+  .links { display: flex; gap: 6px; font-family: var(--mono); font-size: 0.82rem; }
+  .links a { text-decoration: none; padding: 6px 10px; border-radius: 8px; color: var(--muted); }
+  .links a:hover { background: var(--ink); color: var(--paper); }
+
+  /* ---------- Hero ---------- */
+  .hero { padding: 72px 0 40px; }
+  .tagline { font-family: var(--mono); font-size: 0.85rem; color: var(--teal); margin-bottom: 18px; }
+  .tagline::before { content: "● "; color: var(--accent); animation: blink 1.6s infinite; }
+  @keyframes blink { 50% { opacity: 0.2; } }
+  h1 {
+    font-family: var(--display); font-weight: 800; letter-spacing: -0.035em;
+    font-size: clamp(2.6rem, 8vw, 5.4rem); line-height: 0.98; margin-bottom: 22px;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+  .lead { max-width: 640px; font-size: 1.1rem; color: var(--muted); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 12px;
+    font-weight: 600; font-size: 0.95rem; text-decoration: none; border: 2px solid var(--ink); cursor: pointer;
+    font-family: inherit; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn.primary { background: var(--ink); color: var(--paper); box-shadow: 4px 4px 0 var(--accent); }
+  .btn.primary:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--accent); }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn.ghost:hover { background: var(--card); }
+
+  .hero-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; }
+  .avatar { position: relative; width: 250px; height: 250px; flex: none; }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid var(--ink); display: block; position: relative; z-index: 1; background: var(--card); }
+  .avatar::before { content: ""; position: absolute; inset: 0; border-radius: 50%; background: var(--accent); transform: translate(10px, 10px); }
+  .avatar .badge { position: absolute; z-index: 2; left: -14px; bottom: 18px; background: var(--card); border: 2px solid var(--ink); border-radius: 99px; padding: 5px 12px; font-family: var(--mono); font-size: 0.74rem; font-weight: 600; white-space: nowrap; }
+  .avatar .badge::before { content: "● "; color: #2f9e44; }
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 26px; }
+    .avatar { order: -1; width: 150px; height: 150px; }
+    .avatar .badge { left: 112px; bottom: 10px; }
+  }
+
+  /* process line */
+  .process { margin-top: 48px; background: var(--card); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 10px 12px 4px; }
+  .process svg { width: 100%; height: auto; display: block; }
+  .process-cap { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); padding: 2px 6px 8px; }
+
+  /* KPI strip */
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
+  .kpi { background: var(--card); border: 1.5px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+  .kpi b { display: block; font-family: var(--display); font-size: 2rem; font-weight: 800; line-height: 1.1; }
+  .kpi span { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.04em; }
+
+  /* ---------- Sections ---------- */
+  section { padding: 72px 0 24px; }
+  .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 10px; flex-wrap: wrap; }
+  .sec-num { font-family: var(--mono); font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+  h2 { font-family: var(--display); font-weight: 800; font-size: clamp(1.9rem, 4.5vw, 2.8rem); letter-spacing: -0.03em; line-height: 1.05; }
+  .sec-sub { color: var(--muted); max-width: 680px; margin-bottom: 30px; }
+
+  /* ---------- Lab ---------- */
+  .lab { display: grid; gap: 26px; }
+  .exp {
+    background: var(--card); border: 1.5px solid var(--ink); border-radius: var(--radius);
+    display: grid; grid-template-columns: 1fr 1.15fr; overflow: hidden;
+  }
+  .exp-info { padding: 28px; border-right: 1.5px dashed var(--line); display: flex; flex-direction: column; gap: 12px; }
+  .exp-id { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); font-weight: 600; letter-spacing: 0.05em; }
+  .exp h3 { font-family: var(--display); font-size: 1.55rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+  .exp p { color: var(--muted); font-size: 0.95rem; }
+  .date { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { font-family: var(--mono); font-size: 0.72rem; padding: 3px 9px; border-radius: 99px; background: var(--teal-soft); color: var(--teal); }
+  .note { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-top: auto; padding-top: 6px; }
+  .exp-play { padding: 22px; background: #fbf8f1; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .play-label { font-family: var(--mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+  .play-label::before { content: "▶ "; color: var(--accent); }
+
+  .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; }
+  .ctrl label { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 0.74rem; color: var(--muted); margin-bottom: 2px; gap: 6px; }
+  .ctrl label output { color: var(--ink); font-weight: 600; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+
+  .result {
+    display: flex; flex-wrap: wrap; gap: 8px 22px; padding: 12px 14px; border-radius: 12px;
+    background: var(--ink); color: var(--paper); font-family: var(--mono); font-size: 0.82rem;
+  }
+  .result b { color: #ffb489; font-weight: 600; }
+  .chart { width: 100%; height: auto; display: block; background: var(--card); border: 1px solid var(--line); border-radius: 12px; }
+
+  /* stopwatch */
+  .watch { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .watch-time { font-family: var(--mono); font-size: 2rem; font-weight: 600; min-width: 130px; }
+  .watch .btn { padding: 8px 14px; font-size: 0.85rem; }
+  .btn.small { padding: 8px 14px; font-size: 0.85rem; }
+
+  /* concept cards */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .concept { background: var(--card); border: 1.5px solid var(--ink); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+  .concept .viz { background: var(--teal-soft); border-bottom: 1.5px solid var(--ink); }
+  .concept .viz svg { width: 100%; height: auto; display: block; }
+  .concept .body { padding: 24px; display: flex; flex-direction: column; gap: 10px; }
+
+  /* ---------- Gantt ---------- */
+  .gantt-box { background: var(--card); border: 1.5px solid var(--ink); border-radius: var(--radius); padding: 18px; overflow-x: auto; }
+  .gantt { min-width: 760px; }
+  .g-row { display: grid; grid-template-columns: 210px 1fr; align-items: center; min-height: 40px; border-bottom: 1px dashed var(--line); }
+  .g-row:last-child { border-bottom: 0; }
+  .g-name { font-size: 0.88rem; font-weight: 500; padding-right: 12px; }
+  .g-name small { display: block; font-family: var(--mono); font-size: 0.68rem; color: var(--muted); font-weight: 400; }
+  .g-track { position: relative; height: 40px; }
+  .g-bar {
+    position: absolute; top: 10px; height: 20px; border-radius: 6px; background: var(--teal);
+    transform-origin: left; animation: grow 1s cubic-bezier(.2,.8,.2,1) both;
+  }
+  .g-bar.hot { background: var(--accent); }
+  .g-bar.long { background: repeating-linear-gradient(45deg, var(--ink), var(--ink) 8px, #2a3a5e 8px, #2a3a5e 16px); }
+  .g-bar.long::before { content: "since Sep 2022 →"; position: absolute; left: 8px; top: 0; font-family: var(--mono); font-size: 0.68rem; color: #fff; line-height: 20px; }
+  .g-mile { position: absolute; top: 12px; width: 16px; height: 16px; background: var(--accent); transform: rotate(45deg); margin-left: -8px; }
+  @keyframes grow { from { transform: scaleX(0); } }
+  .g-axis { display: grid; grid-template-columns: 210px 1fr; }
+  .g-months { position: relative; height: 26px; font-family: var(--mono); font-size: 0.68rem; color: var(--muted); }
+  .g-months span { position: absolute; top: 4px; transform: translateX(-50%); white-space: nowrap; }
+  .g-today { position: absolute; top: -4px; bottom: 0; width: 0; border-left: 2px dashed var(--accent); z-index: 2; pointer-events: none; }
+  .g-today::after { content: "today"; position: absolute; top: -2px; left: 4px; font-family: var(--mono); font-size: 0.66rem; color: var(--accent); font-weight: 600; }
+  .g-body { position: relative; }
+  .g-legend { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 14px; font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+  .g-legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+
+  /* ---------- Toolkit ---------- */
+  .tool-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .tool { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .tool h3 { font-family: var(--mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 14px; }
+  .tool ul { list-style: none; display: grid; gap: 8px; font-size: 0.94rem; }
+  .tool li { padding-left: 16px; position: relative; }
+  .tool li::before { content: "›"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+  .lang { display: grid; gap: 12px; }
+  .lang-row { font-size: 0.92rem; }
+  .lang-row div { display: flex; justify-content: space-between; }
+  .lang-row small { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+  .meter { height: 6px; background: var(--line); border-radius: 99px; margin-top: 5px; overflow: hidden; }
+  .meter i { display: block; height: 100%; background: var(--teal); border-radius: 99px; }
+
+  .creds { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 22px; }
+  .cred { background: var(--card); border: 1.5px solid var(--line); border-radius: var(--radius); padding: 20px 22px; display: flex; gap: 16px; align-items: flex-start; }
+  .cred-icon { flex: none; width: 42px; height: 42px; border-radius: 12px; background: var(--accent-soft); color: var(--accent); display: grid; place-items: center; font-family: var(--mono); font-weight: 600; }
+  .cred h4 { font-size: 0.95rem; font-weight: 600; }
+  .cred p { font-size: 0.86rem; color: var(--muted); }
+
+  /* ---------- Contact ---------- */
+  .contact {
+    margin: 30px 0 50px; background: var(--ink); color: var(--paper); border-radius: 22px; padding: 44px 36px;
+    display: grid; grid-template-columns: 1.3fr 1fr; gap: 30px; align-items: center;
+  }
+  .contact h2 { color: var(--paper); }
+  .contact h2 em { font-style: normal; color: #ffb489; }
+  .contact p { color: #b9c0cf; margin-top: 12px; }
+  .contact-links { display: grid; gap: 10px; }
+  .contact-links a {
+    display: flex; justify-content: space-between; align-items: center; gap: 12px; text-decoration: none;
+    padding: 14px 16px; border: 1px solid #36466b; border-radius: 12px; font-family: var(--mono); font-size: 0.85rem;
+    transition: background 0.15s; word-break: break-all;
+  }
+  .contact-links a:hover { background: #1f2f52; }
+  .contact-links a span:last-child { color: #ffb489; flex: none; }
+  footer { padding: 0 0 36px; font-family: var(--mono); font-size: 0.75rem; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s, transform 0.7s; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 860px) {
+    .exp { grid-template-columns: 1fr; }
+    .exp-info { border-right: 0; border-bottom: 1.5px dashed var(--line); }
+    .duo, .tool-grid, .creds, .contact { grid-template-columns: 1fr; }
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
+    .links { display: none; }
+    .hero { padding-top: 48px; }
+    .controls { grid-template-columns: 1fr; }
+    .exp-info, .exp-play { padding: 20px; }
+    .contact { padding: 30px 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#top" class="logo">ceren<span>.</span>mıhcı</a>
+    <div class="links">
+      <a href="#lab">01 Lab</a>
+      <a href="#timeline">02 Timeline</a>
+      <a href="#toolkit">03 Toolkit</a>
+      <a href="#contact">04 Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+    <div class="tagline">Industrial Engineering · Yaşar University · İzmir</div>
+    <h1>I find the <em>bottleneck</em>,<br>then I fix it.</h1>
+    <p class="lead">I'm Ceren, an Industrial Engineering student on a 100% scholarship. I model production systems, time
+      real processes and turn numbers into decisions. Don't just read about my projects: <strong>run them below.</strong></p>
+    <div class="actions">
+      <a class="btn primary" href="#lab">Open the project lab ↓</a>
+      <a class="btn ghost" href="Ceren_Mihci_CV.pdf" target="_blank">Download CV (PDF)</a>
+    </div>
+
+      </div>
+      <div class="avatar">
+        <img src="data:image/jpeg;base64,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" alt="Ceren Mıhcı">
+        <span class="badge">open to internships</span>
+      </div>
+    </div>
+
+    <div class="process" aria-label="My process: observe, model, optimize, improve">
+      <svg viewBox="0 0 1000 150" role="img">
+        <defs>
+          <path id="belt" d="M70 75 H930"/>
+        </defs>
+        <line x1="70" y1="75" x2="930" y2="75" stroke="#14213d" stroke-width="3"/>
+        <line x1="70" y1="75" x2="930" y2="75" stroke="#f4f1ea" stroke-width="1.5" stroke-dasharray="6 10">
+          <animate attributeName="stroke-dashoffset" from="32" to="0" dur="0.8s" repeatCount="indefinite"/>
+        </line>
+        <g font-family="IBM Plex Mono, monospace" text-anchor="middle">
+          <g transform="translate(150 75)"><rect x="-58" y="-34" width="116" height="68" rx="12" fill="#fffdf8" stroke="#14213d" stroke-width="2"/><text y="-6" font-size="13" font-weight="600" fill="#14213d">OBSERVE</text><text y="14" font-size="10.5" fill="#5b6475">time study</text></g>
+          <g transform="translate(383 75)"><rect x="-58" y="-34" width="116" height="68" rx="12" fill="#fffdf8" stroke="#14213d" stroke-width="2"/><text y="-6" font-size="13" font-weight="600" fill="#14213d">MODEL</text><text y="14" font-size="10.5" fill="#5b6475">LP · statistics</text></g>
+          <g transform="translate(616 75)"><rect x="-58" y="-34" width="116" height="68" rx="12" fill="#fffdf8" stroke="#14213d" stroke-width="2"/><text y="-6" font-size="13" font-weight="600" fill="#14213d">OPTIMIZE</text><text y="14" font-size="10.5" fill="#5b6475">LINGO · Solver</text></g>
+          <g transform="translate(850 75)"><rect x="-58" y="-34" width="116" height="68" rx="12" fill="#e8590c" stroke="#14213d" stroke-width="2"/><text y="-6" font-size="13" font-weight="600" fill="#fff">IMPROVE</text><text y="14" font-size="10.5" fill="#fff">NPW · IRR</text></g>
+        </g>
+        <g fill="#e8590c">
+          <circle r="6"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#belt"/></animateMotion></circle>
+          <circle r="6" fill="#1f6f6b"><animateMotion dur="4s" begin="1.33s" repeatCount="indefinite"><mpath href="#belt"/></animateMotion></circle>
+          <circle r="6" fill="#14213d"><animateMotion dur="4s" begin="2.66s" repeatCount="indefinite"><mpath href="#belt"/></animateMotion></circle>
+        </g>
+      </svg>
+      <div class="process-cap">// my workflow, running as a production line</div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><b data-count="5">0</b><span>projects</span></div>
+      <div class="kpi"><b data-count="100" data-suffix="%">0</b><span>scholarship</span></div>
+      <div class="kpi"><b data-count="4">0</b><span>languages</span></div>
+      <div class="kpi"><b data-count="2">0</b><span>certificates</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= LAB ================= -->
+<section id="lab">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">01 /</span><h2>The project lab</h2></div>
+    <p class="sec-sub">Each project below comes with a small working version of the method I used. Move the sliders and press the buttons; the math runs live in your browser.</p>
+
+    <div class="lab">
+
+      <!-- EXP 1: LP -->
+      <article class="exp reveal">
+        <div class="exp-info">
+          <span class="exp-id">EXP-01 · OPERATIONS RESEARCH</span>
+          <h3>Production Optimization with Linear Programming</h3>
+          <span class="date">May 2025 – Jun 2025</span>
+          <p>Formulated and solved production optimization models in LINGO and Excel Solver, analyzing resource constraints to support profit maximization decisions.</p>
+          <div class="chips"><span class="chip">LINGO</span><span class="chip">Excel Solver</span><span class="chip">Linear Programming</span></div>
+          <p class="note">* Interactive demo with illustrative numbers. Two products, two shared resources.</p>
+        </div>
+        <div class="exp-play">
+          <span class="play-label">Try it: change the capacities and profits</span>
+          <div class="controls">
+            <div class="ctrl"><label>Machine hours <output id="lpHo"></output></label><input type="range" id="lpH" min="40" max="120" value="80"></div>
+            <div class="ctrl"><label>Labor hours <output id="lpLo"></output></label><input type="range" id="lpL" min="40" max="150" value="90"></div>
+            <div class="ctrl"><label>Profit / unit A <output id="lpAo"></output></label><input type="range" id="lpA" min="5" max="60" value="30"></div>
+            <div class="ctrl"><label>Profit / unit B <output id="lpBo"></output></label><input type="range" id="lpB" min="5" max="60" value="25"></div>
+          </div>
+          <svg class="chart" id="lpChart" viewBox="0 0 420 300" role="img" aria-label="Feasible region and optimal production mix"></svg>
+          <div class="result" id="lpRes"></div>
+        </div>
+      </article>
+
+      <!-- EXP 2: Time study -->
+      <article class="exp reveal">
+        <div class="exp-info">
+          <span class="exp-id">EXP-02 · WORK MEASUREMENT</span>
+          <h3>Time Study on Makeup Product Packaging</h3>
+          <span class="date">May 2025 – Jun 2025</span>
+          <p>Collected cycle time data on a packaging process, calculated normal and standard times using performance rating and allowances, and identified process inefficiencies.</p>
+          <div class="chips"><span class="chip">Time Study</span><span class="chip">Statistics</span><span class="chip">Process Improvement</span></div>
+          <p class="note">* Be the analyst: time a few cycles yourself with the stopwatch (e.g. tap your desk), or use the sample data.</p>
+        </div>
+        <div class="exp-play">
+          <span class="play-label">Try it: time some cycles</span>
+          <div class="watch">
+            <div class="watch-time" id="tsClock">0.00 s</div>
+            <button class="btn primary small" id="tsStart">Start</button>
+            <button class="btn ghost small" id="tsLap" disabled>Lap ⏎</button>
+            <button class="btn ghost small" id="tsReset">Sample data</button>
+          </div>
+          <div class="controls">
+            <div class="ctrl"><label>Performance rating <output id="tsRo"></output></label><input type="range" id="tsR" min="80" max="120" value="105"></div>
+            <div class="ctrl"><label>Allowance (PF&amp;D) <output id="tsAo"></output></label><input type="range" id="tsA" min="5" max="25" value="15"></div>
+          </div>
+          <svg class="chart" id="tsChart" viewBox="0 0 420 190" role="img" aria-label="Observed cycle times"></svg>
+          <div class="result" id="tsRes"></div>
+        </div>
+      </article>
+
+      <!-- EXP 3: Econ -->
+      <article class="exp reveal">
+        <div class="exp-info">
+          <span class="exp-id">EXP-03 · ENGINEERING ECONOMICS</span>
+          <h3>Boiler System Selection for a Hospital</h3>
+          <span class="date">Mar 2025 – Jun 2025</span>
+          <p>Evaluated two boiler system alternatives for a hospital using Net Present Worth (NPW), Annual Equivalent Worth (AEW) and Internal Rate of Return (IRR) in Excel, and recommended the most cost-effective option.</p>
+          <div class="chips"><span class="chip">NPW</span><span class="chip">AEW</span><span class="chip">IRR</span><span class="chip">Excel</span></div>
+          <p class="note">* Illustrative values. Cheap to buy vs. cheap to run: which one wins depends on the interest rate.</p>
+        </div>
+        <div class="exp-play">
+          <span class="play-label">Try it: move the interest rate</span>
+          <div class="controls">
+            <div class="ctrl"><label>Interest rate <output id="ecIo"></output></label><input type="range" id="ecI" min="1" max="30" value="10"></div>
+            <div class="ctrl"><label>Service life <output id="ecNo"></output></label><input type="range" id="ecN" min="5" max="25" value="15"></div>
+          </div>
+          <svg class="chart" id="ecChart" viewBox="0 0 420 240" role="img" aria-label="Present worth of cost versus interest rate"></svg>
+          <div class="result" id="ecRes"></div>
+        </div>
+      </article>
+
+      <!-- Concept projects -->
+      <div class="duo">
+        <article class="concept reveal">
+          <div class="viz">
+            <svg viewBox="0 0 400 190" role="img" aria-label="Animated heartbeat on a wearable device">
+              <rect x="150" y="18" width="100" height="154" rx="18" fill="#9cc7c1"/>
+              <rect x="134" y="40" width="132" height="110" rx="28" fill="#14213d"/>
+              <rect x="144" y="50" width="112" height="90" rx="20" fill="#fffdf8"/>
+              <polyline id="pulse" points="150,95 175,95 183,75 195,120 205,82 212,95 250,95" fill="none" stroke="#e8590c" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="160" stroke-dashoffset="160">
+                <animate attributeName="stroke-dashoffset" values="160;0;0;-160" keyTimes="0;0.45;0.6;1" dur="1.8s" repeatCount="indefinite"/>
+              </polyline>
+              <text x="200" y="128" text-anchor="middle" font-family="IBM Plex Mono" font-size="12" font-weight="600" fill="#14213d">72 bpm</text>
+              <path d="M320 82 c-7 -14 -28 -9 -23 7 c3 10 23 23 23 23 c0 0 20 -13 23 -23 c5 -16 -16 -21 -23 -7z" fill="#e8590c">
+                <animateTransform attributeName="transform" type="scale" values="1;1.06;1" dur="0.9s" repeatCount="indefinite" additive="sum"/>
+              </path>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="exp-id">EXP-04 · ENTREPRENEURSHIP</span>
+            <h3 style="font-family:var(--display);font-size:1.35rem;letter-spacing:-.02em">Startup Business Plan: Wearable Health Device</h3>
+            <span class="date">Apr 2025 – Jun 2025</span>
+            <p style="color:var(--muted);font-size:.95rem">Developed a business model canvas, customer segment analysis and financial estimations, and delivered the pitch presentation in an entrepreneurship-focused setting.</p>
+            <div class="chips"><span class="chip">Business Model Canvas</span><span class="chip">Financial Planning</span><span class="chip">Pitching</span></div>
+          </div>
+        </article>
+
+        <article class="concept reveal">
+          <div class="viz">
+            <svg viewBox="0 0 400 190" role="img" aria-label="Animated drone flying a delivery route">
+              <path id="route" d="M40 160 C120 40, 200 170, 280 80 S 360 40, 370 40" fill="none" stroke="#1f6f6b" stroke-width="2.5" stroke-dasharray="7 6"/>
+              <circle cx="40" cy="160" r="7" fill="#1f6f6b"/>
+              <g transform="translate(370 40)"><rect x="-10" y="-10" width="20" height="20" rx="4" fill="#e8590c"/></g>
+              <g fill="none" stroke="#1f6f6b" stroke-width="2.5" stroke-linecap="round" opacity="0.7">
+                <path d="M60 40 a14 14 0 0 1 0 20"/><path d="M68 34 a24 24 0 0 1 0 32"/><path d="M76 28 a34 34 0 0 1 0 44"/>
+              </g>
+              <text x="36" y="56" font-family="IBM Plex Mono" font-size="15" font-weight="700" fill="#1f6f6b">5G</text>
+              <g>
+                <animateMotion dur="5s" repeatCount="indefinite" rotate="0"><mpath href="#route"/></animateMotion>
+                <line x1="-26" y1="-8" x2="26" y2="-8" stroke="#14213d" stroke-width="3"/>
+                <ellipse cx="-26" cy="-11" rx="13" ry="3" fill="#14213d" opacity="0.55"/>
+                <ellipse cx="26" cy="-11" rx="13" ry="3" fill="#14213d" opacity="0.55"/>
+                <rect x="-13" y="-10" width="26" height="15" rx="5" fill="#14213d"/>
+                <rect x="-7" y="5" width="14" height="10" rx="2" fill="#e8590c"/>
+              </g>
+            </svg>
+          </div>
+          <div class="body">
+            <span class="exp-id">EXP-05 · VODAFONE FUTURE CHALLENGE 2025</span>
+            <h3 style="font-family:var(--display);font-size:1.35rem;letter-spacing:-.02em">AirLink: 5G-Enabled Drone Logistics</h3>
+            <span class="date">Oct 2025</span>
+            <p style="color:var(--muted);font-size:.95rem">Co-developed AirLink, a 5G-enabled drone logistics concept, as part of a team, contributing to system architecture, business model design and the pitch presentation.</p>
+            <div class="chips"><span class="chip">5G</span><span class="chip">Drone Logistics</span><span class="chip">Teamwork</span></div>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIMELINE ================= -->
+<section id="timeline">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">02 /</span><h2>My schedule, as a Gantt chart</h2></div>
+    <p class="sec-sub">An industrial engineer's CV should look like a production schedule. Here is my education and project work, plotted on one.</p>
+    <div class="gantt-box reveal">
+      <div class="gantt" id="gantt"></div>
+      <div class="g-legend">
+        <span><i style="background:#14213d"></i>Education</span>
+        <span><i style="background:#1f6f6b"></i>Course project</span>
+        <span><i style="background:#e8590c"></i>Competition</span>
+        <span><i style="background:#e8590c;transform:rotate(45deg);border-radius:0"></i>Event</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TOOLKIT ================= -->
+<section id="toolkit">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">03 /</span><h2>Toolkit</h2></div>
+    <p class="sec-sub">Education, methods, software and languages.</p>
+
+    <div class="cred reveal" style="margin-bottom:22px;border-color:var(--ink)">
+      <div class="cred-icon">B.Sc</div>
+      <div>
+        <h4>Bachelor of Science in Industrial Engineering</h4>
+        <p>Yaşar University, İzmir, Turkey · Sep 2022 – Present · <strong style="color:var(--accent)">100% Scholarship</strong></p>
+      </div>
+    </div>
+
+    <div class="tool-grid">
+      <div class="tool reveal">
+        <h3>Methods</h3>
+        <ul>
+          <li>Linear Programming &amp; Optimization</li>
+          <li>Operations Research</li>
+          <li>Production Planning</li>
+          <li>Time Study &amp; Work Measurement</li>
+          <li>Process Improvement</li>
+          <li>Statistical &amp; Data Analysis</li>
+          <li>Engineering Economics (NPW, AEW, IRR)</li>
+        </ul>
+      </div>
+      <div class="tool reveal">
+        <h3>Software</h3>
+        <ul>
+          <li>Microsoft Excel: Solver, Pivot Tables, Data Analysis ToolPak</li>
+          <li>LINGO</li>
+          <li>Python</li>
+        </ul>
+        <h3 style="margin-top:22px">Soft skills</h3>
+        <ul>
+          <li>Analytical thinking &amp; problem solving</li>
+          <li>Teamwork &amp; communication</li>
+          <li>Presentation &amp; pitching</li>
+        </ul>
+      </div>
+      <div class="tool reveal">
+        <h3>Languages</h3>
+        <div class="lang">
+          <div class="lang-row"><div>Turkish <small>Native</small></div><div class="meter"><i style="width:100%"></i></div></div>
+          <div class="lang-row"><div>English <small>B2 · Upper-Intermediate</small></div><div class="meter"><i style="width:72%"></i></div></div>
+          <div class="lang-row"><div>Spanish <small>A1 · Beginner</small></div><div class="meter"><i style="width:18%"></i></div></div>
+          <div class="lang-row"><div>Korean <small>A1 · Beginner</small></div><div class="meter"><i style="width:18%"></i></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="creds">
+      <div class="cred reveal"><div class="cred-icon">✓</div><div><h4>Next Gen Academy Certificate</h4><p>SOCAR Türkiye</p></div></div>
+      <div class="cred reveal"><div class="cred-icon">✓</div><div><h4>Excel Training Program</h4><p>BTK Akademi</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact" style="padding-top:40px">
+  <div class="wrap">
+    <div class="contact reveal">
+      <div>
+        <h2>Looking for an intern who <em>optimizes</em>?</h2>
+        <p>I'm looking for a summer internship in production, operations or process improvement. Let's talk.</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:cerenmiihci@gmail.com"><span>cerenmiihci@gmail.com</span><span>↗</span></a>
+        <a href="https://www.linkedin.com/in/ceren-m%C4%B1hc%C4%B1-1845912a0" target="_blank"><span>LinkedIn</span><span>↗</span></a>
+        <a href="Ceren_Mihci_CV.pdf" target="_blank"><span>CV (PDF)</span><span>↓</span></a>
+      </div>
+    </div>
+    <footer>
+      <span>© 2026 Ceren Mıhcı · Bornova, İzmir</span>
+      <span>built with HTML, CSS &amp; a little linear algebra</span>
+    </footer>
+  </div>
+</section>
+
+<script>
+const $ = id => document.getElementById(id);
+const NS = "http://www.w3.org/2000/svg";
+const C = { ink: "#14213d", muted: "#5b6475", line: "#d9d3c4", accent: "#e8590c", teal: "#1f6f6b", tealSoft: "#9cc7c1" };
+function el(tag, attrs, parent, text) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (text !== undefined) e.textContent = text;
+  if (parent) parent.appendChild(e);
+  return e;
+}
+const fmt = (n, d = 0) => n.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+
+/* ---------- KPI count-up ---------- */
+document.querySelectorAll("[data-count]").forEach(b => {
+  const target = +b.dataset.count, suf = b.dataset.suffix || "";
+  let t0 = null;
+  const step = ts => { t0 ??= ts; const p = Math.min((ts - t0) / 1200, 1); b.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suf; if (p < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+});
+
+/* ---------- Reveal on scroll ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.12 });
+document.querySelectorAll(".reveal").forEach(n => io.observe(n));
+
+/* ---------- EXP-01: LP ----------
+   max  pA*x + pB*y
+   s.t. 2x + 1y <= H   (machine hours)
+        1x + 3y <= L   (labor hours)
+        x, y >= 0                                  */
+function lp() {
+  const H = +$("lpH").value, L = +$("lpL").value, pA = +$("lpA").value, pB = +$("lpB").value;
+  $("lpHo").textContent = H + " h"; $("lpLo").textContent = L + " h";
+  $("lpAo").textContent = "$" + pA; $("lpBo").textContent = "$" + pB;
+  const ok = p => p[0] >= -1e-9 && p[1] >= -1e-9 && 2 * p[0] + p[1] <= H + 1e-9 && p[0] + 3 * p[1] <= L + 1e-9;
+  const cand = [[0, 0], [H / 2, 0], [L, 0], [0, H], [0, L / 3], [(3 * H - L) / 5, (2 * L - H) / 5]];
+  let verts = cand.filter(ok);
+  verts = verts.filter((p, i) => verts.findIndex(q => Math.abs(q[0] - p[0]) < 1e-6 && Math.abs(q[1] - p[1]) < 1e-6) === i);
+  const cx = verts.reduce((s, p) => s + p[0], 0) / verts.length, cy = verts.reduce((s, p) => s + p[1], 0) / verts.length;
+  verts.sort((a, b) => Math.atan2(a[1] - cy, a[0] - cx) - Math.atan2(b[1] - cy, b[0] - cx));
+  let best = verts[0], bz = -1;
+  verts.forEach(p => { const z = pA * p[0] + pB * p[1]; if (z > bz + 1e-9) { bz = z; best = p; } });
+
+  const svg = $("lpChart"); svg.innerHTML = "";
+  const X0 = 46, Y0 = 268, W = 350, Hh = 236, MX = 70, MY = 55;
+  const sx = x => X0 + x / MX * W, sy = y => Y0 - y / MY * Hh;
+  for (let i = 0; i <= MX; i += 10) { el("line", { x1: sx(i), y1: Y0, x2: sx(i), y2: Y0 - Hh, stroke: C.line, "stroke-width": 0.6 }, svg); el("text", { x: sx(i), y: Y0 + 15, "font-size": 10, "text-anchor": "middle", fill: C.muted, "font-family": "IBM Plex Mono" }, svg, i); }
+  for (let j = 0; j <= MY; j += 10) { el("line", { x1: X0, y1: sy(j), x2: X0 + W, y2: sy(j), stroke: C.line, "stroke-width": 0.6 }, svg); el("text", { x: X0 - 8, y: sy(j) + 3, "font-size": 10, "text-anchor": "end", fill: C.muted, "font-family": "IBM Plex Mono" }, svg, j); }
+  el("text", { x: X0 + W, y: Y0 - 6, "font-size": 10.5, "text-anchor": "end", fill: C.ink, "font-family": "IBM Plex Mono", "font-weight": 600 }, svg, "units of A →");
+  el("text", { x: X0 - 8, y: Y0 - Hh - 8, "font-size": 10.5, fill: C.ink, "font-family": "IBM Plex Mono", "font-weight": 600 }, svg, "↑ units of B");
+  el("polygon", { points: verts.map(p => sx(p[0]) + "," + sy(p[1])).join(" "), fill: C.tealSoft, "fill-opacity": 0.6, stroke: C.teal, "stroke-width": 1.5 }, svg);
+  // constraint lines (clipped to chart box)
+  const clipLine = (a, b, c) => { // a x + b y = c
+    const pts = [];
+    [[0, c / b], [c / a, 0], [MX, (c - a * MX) / b], [(c - b * MY) / a, MY]].forEach(p => { if (p[0] >= -1e-6 && p[0] <= MX + 1e-6 && p[1] >= -1e-6 && p[1] <= MY + 1e-6) pts.push(p); });
+    return pts.slice(0, 2);
+  };
+  [[2, 1, H, "machine"], [1, 3, L, "labor"]].forEach(([a, b, c, name]) => {
+    const p = clipLine(a, b, c); if (p.length < 2) return;
+    el("line", { x1: sx(p[0][0]), y1: sy(p[0][1]), x2: sx(p[1][0]), y2: sy(p[1][1]), stroke: C.ink, "stroke-width": 1.4, "stroke-dasharray": "5 4" }, svg);
+    const lab = p[0][1] > p[1][1] ? p[0] : p[1];
+    el("text", { x: sx(lab[0]) + 6, y: sy(lab[1]) + 12, "font-size": 10, fill: C.ink, "font-family": "IBM Plex Mono" }, svg, name);
+  });
+  // iso-profit line through optimum
+  const iso = clipLine(pA, pB, bz);
+  if (iso.length === 2) el("line", { x1: sx(iso[0][0]), y1: sy(iso[0][1]), x2: sx(iso[1][0]), y2: sy(iso[1][1]), stroke: C.accent, "stroke-width": 2 }, svg);
+  el("circle", { cx: sx(best[0]), cy: sy(best[1]), r: 7, fill: C.accent, stroke: "#fff", "stroke-width": 2.5 }, svg);
+  const tx = Math.min(sx(best[0]) + 10, X0 + W - 70);
+  el("text", { x: tx, y: Math.max(sy(best[1]) - 10, Y0 - Hh + 26), "font-size": 11, "font-weight": 600, fill: C.accent, "font-family": "IBM Plex Mono" }, svg, "optimum");
+
+  const binding = [];
+  if (Math.abs(2 * best[0] + best[1] - H) < 1e-6) binding.push("machine");
+  if (Math.abs(best[0] + 3 * best[1] - L) < 1e-6) binding.push("labor");
+  $("lpRes").innerHTML = `<span>Make <b>${fmt(best[0], 1)}</b> × A</span><span><b>${fmt(best[1], 1)}</b> × B</span><span>Profit <b>$${fmt(bz)}</b></span><span>Bottleneck: <b>${binding.join(" + ") || "none"}</b></span>`;
+}
+["lpH", "lpL", "lpA", "lpB"].forEach(id => $(id).addEventListener("input", lp));
+lp();
+
+/* ---------- EXP-02: Time study ---------- */
+const SAMPLE = [12.4, 11.8, 12.9, 12.1, 13.0, 12.6, 11.9, 12.3];
+let obs = SAMPLE.slice(), running = false, tStart = 0, tLast = 0, raf = null, userMode = false;
+function tsCalc() {
+  const R = +$("tsR").value, A = +$("tsA").value;
+  $("tsRo").textContent = R + "%"; $("tsAo").textContent = A + "%";
+  const svg = $("tsChart"); svg.innerHTML = "";
+  const n = obs.length;
+  const X0 = 40, Y0 = 160, W = 365, Hh = 135;
+  const max = Math.max(5, ...obs) * 1.15;
+  const sy = v => Y0 - v / max * Hh;
+  [0, 0.5, 1].forEach(f => { const v = max * f; el("line", { x1: X0, x2: X0 + W, y1: sy(v), y2: sy(v), stroke: C.line, "stroke-width": 0.6 }, svg); el("text", { x: X0 - 6, y: sy(v) + 3, "font-size": 9.5, "text-anchor": "end", fill: C.muted, "font-family": "IBM Plex Mono" }, svg, fmt(v, 0) + "s"); });
+  if (!n) {
+    el("text", { x: X0 + W / 2, y: 90, "text-anchor": "middle", "font-size": 12, fill: C.muted, "font-family": "IBM Plex Mono" }, svg, "press Lap to record each cycle");
+    $("tsRes").innerHTML = `<span>Waiting for observations…</span>`; return;
+  }
+  const mean = obs.reduce((a, b) => a + b, 0) / n;
+  const bw = Math.min(34, W / n * 0.7), gap = W / n;
+  obs.forEach((v, i) => {
+    el("rect", { x: X0 + i * gap + (gap - bw) / 2, y: sy(v), width: bw, height: Y0 - sy(v), rx: 3, fill: Math.abs(v - mean) / mean > 0.08 ? C.accent : C.teal }, svg);
+    if (n <= 16) el("text", { x: X0 + i * gap + gap / 2, y: Y0 + 13, "text-anchor": "middle", "font-size": 9, fill: C.muted, "font-family": "IBM Plex Mono" }, svg, i + 1);
+  });
+  el("line", { x1: X0, x2: X0 + W, y1: sy(mean), y2: sy(mean), stroke: C.ink, "stroke-width": 1.5, "stroke-dasharray": "5 4" }, svg);
+  el("text", { x: X0 + W, y: sy(mean) - 5, "text-anchor": "end", "font-size": 10, fill: C.ink, "font-weight": 600, "font-family": "IBM Plex Mono" }, svg, "mean " + fmt(mean, 2) + "s");
+  const NT = mean * R / 100, ST = NT * (1 + A / 100);
+  let req = "–";
+  if (n >= 2) {
+    const s = obs.reduce((a, b) => a + b, 0), s2 = obs.reduce((a, b) => a + b * b, 0);
+    const inside = n * s2 - s * s;
+    req = Math.ceil(Math.pow(40 * Math.sqrt(Math.max(inside, 0)) / s, 2));
+  }
+  $("tsRes").innerHTML = `<span>n = <b>${n}</b></span><span>Normal time <b>${fmt(NT, 2)}s</b></span><span>Standard time <b>${fmt(ST, 2)}s</b></span><span>Required n (95%, ±5%) <b>${req}</b></span>`;
+}
+function tick() { if (!running) return; $("tsClock").textContent = ((performance.now() - tLast) / 1000).toFixed(2) + " s"; raf = requestAnimationFrame(tick); }
+$("tsStart").addEventListener("click", () => {
+  if (!running) {
+    if (!userMode) { obs = []; userMode = true; }
+    running = true; tLast = performance.now(); $("tsStart").textContent = "Stop"; $("tsLap").disabled = false; tick();
+  } else {
+    running = false; cancelAnimationFrame(raf); $("tsStart").textContent = "Start"; $("tsLap").disabled = true;
+  }
+  tsCalc();
+});
+$("tsLap").addEventListener("click", () => {
+  if (!running) return;
+  const now = performance.now(); obs.push(+((now - tLast) / 1000).toFixed(2)); tLast = now;
+  if (obs.length > 30) obs.shift();
+  tsCalc();
+});
+$("tsReset").addEventListener("click", () => {
+  running = false; cancelAnimationFrame(raf); userMode = false; obs = SAMPLE.slice();
+  $("tsStart").textContent = "Start"; $("tsLap").disabled = true; $("tsClock").textContent = "0.00 s"; tsCalc();
+});
+["tsR", "tsA"].forEach(id => $(id).addEventListener("input", tsCalc));
+tsCalc();
+
+/* ---------- EXP-03: Engineering economics ----------
+   Boiler A: cheaper to buy, more expensive to run
+   Boiler B: expensive to buy, efficient to run           */
+const BA = { name: "Boiler A", I: 250000, C: 62000 }, BB = { name: "Boiler B", I: 420000, C: 38000 };
+const PA = (i, n) => (Math.pow(1 + i, n) - 1) / (i * Math.pow(1 + i, n));
+const pw = (b, i, n) => b.I + b.C * PA(i, n);
+function econ() {
+  const i = +$("ecI").value / 100, n = +$("ecN").value;
+  $("ecIo").textContent = (i * 100) + "%"; $("ecNo").textContent = n + " yrs";
+  const svg = $("ecChart"); svg.innerHTML = "";
+  const X0 = 58, Y0 = 200, W = 345, Hh = 175, IMAX = 0.30;
+  let ymax = 0; for (let r = 0.01; r <= IMAX + 1e-9; r += 0.005) ymax = Math.max(ymax, pw(BA, r, n), pw(BB, r, n));
+  ymax = Math.ceil(ymax / 200000) * 200000;
+  const sx = r => X0 + r / IMAX * W, sy = v => Y0 - v / ymax * Hh;
+  for (let r = 0; r <= 0.30001; r += 0.05) { el("line", { x1: sx(r), x2: sx(r), y1: Y0, y2: Y0 - Hh, stroke: C.line, "stroke-width": 0.6 }, svg); el("text", { x: sx(r), y: Y0 + 14, "text-anchor": "middle", "font-size": 9.5, fill: C.muted, "font-family": "IBM Plex Mono" }, svg, Math.round(r * 100) + "%"); }
+  for (let v = 0; v <= ymax; v += ymax / 4) { el("line", { x1: X0, x2: X0 + W, y1: sy(v), y2: sy(v), stroke: C.line, "stroke-width": 0.6 }, svg); el("text", { x: X0 - 6, y: sy(v) + 3, "text-anchor": "end", "font-size": 9.5, fill: C.muted, "font-family": "IBM Plex Mono" }, svg, "$" + fmt(v / 1000) + "k"); }
+  el("text", { x: X0 + W, y: Y0 + 30, "text-anchor": "end", "font-size": 10, fill: C.ink, "font-family": "IBM Plex Mono", "font-weight": 600 }, svg, "interest rate →");
+  [[BA, C.accent], [BB, C.teal]].forEach(([b, col]) => {
+    let d = ""; for (let r = 0.01; r <= IMAX + 1e-9; r += 0.005) d += (d ? " L" : "M") + sx(r).toFixed(1) + " " + sy(pw(b, r, n)).toFixed(1);
+    el("path", { d, fill: "none", stroke: col, "stroke-width": 2.5 }, svg);
+    el("circle", { cx: sx(i), cy: sy(pw(b, i, n)), r: 5.5, fill: col, stroke: "#fff", "stroke-width": 2 }, svg);
+  });
+  el("line", { x1: sx(i), x2: sx(i), y1: Y0, y2: Y0 - Hh, stroke: C.ink, "stroke-width": 1.2, "stroke-dasharray": "4 3" }, svg);
+  // legend
+  el("rect", { x: X0 + W - 150, y: Y0 - Hh + 4, width: 10, height: 10, rx: 2, fill: C.accent }, svg);
+  el("text", { x: X0 + W - 135, y: Y0 - Hh + 13, "font-size": 10, fill: C.ink, "font-family": "IBM Plex Mono" }, svg, "A: cheap to buy");
+  el("rect", { x: X0 + W - 150, y: Y0 - Hh + 20, width: 10, height: 10, rx: 2, fill: C.teal }, svg);
+  el("text", { x: X0 + W - 135, y: Y0 - Hh + 29, "font-size": 10, fill: C.ink, "font-family": "IBM Plex Mono" }, svg, "B: cheap to run");
+
+  // break-even interest rate (bisection)
+  const f = r => pw(BA, r, n) - pw(BB, r, n);
+  let be = null, lo = 0.001, hi = 0.6;
+  if (f(lo) * f(hi) < 0) { for (let k = 0; k < 60; k++) { const m = (lo + hi) / 2; f(lo) * f(m) <= 0 ? hi = m : lo = m; } be = (lo + hi) / 2; }
+  const a = pw(BA, i, n), b = pw(BB, i, n), win = a < b ? BA : BB;
+  const crf = 1 / PA(i, n);
+  $("ecRes").innerHTML = `<span>PW cost A <b>$${fmt(a / 1000)}k</b></span><span>PW cost B <b>$${fmt(b / 1000)}k</b></span><span>AEW cost (winner) <b>$${fmt(Math.min(a, b) * crf / 1000, 1)}k/yr</b></span><span>Choose <b>${win.name}</b>${be ? ` · break-even at <b>${fmt(be * 100, 1)}%</b>` : ""}</span>`;
+}
+["ecI", "ecN"].forEach(id => $(id).addEventListener("input", econ));
+econ();
+
+/* ---------- Gantt ---------- */
+(function gantt() {
+  const start = new Date(2025, 0, 1), end = new Date(2026, 11, 31), today = new Date();
+  const span = end - start, pct = d => Math.max(0, Math.min(100, (d - start) / span * 100));
+  const rows = [
+    { name: "B.Sc. Industrial Engineering", sub: "Yaşar University", s: new Date(2025, 0, 1), e: today, cls: "long" },
+    { name: "Engineering Economics", sub: "Boiler selection", s: new Date(2025, 2, 1), e: new Date(2025, 5, 30), cls: "" },
+    { name: "Startup Business Plan", sub: "Wearable health device", s: new Date(2025, 3, 1), e: new Date(2025, 5, 30), cls: "" },
+    { name: "Production Optimization", sub: "Linear programming", s: new Date(2025, 4, 1), e: new Date(2025, 5, 30), cls: "" },
+    { name: "Time Study", sub: "Makeup packaging", s: new Date(2025, 4, 1), e: new Date(2025, 5, 30), cls: "" },
+    { name: "Sector Days ’25", sub: "Vodafone · Yaşar Univ.", m: new Date(2025, 2, 15) },
+    { name: "Vodafone Future Challenge", sub: "AirLink · idea competition", s: new Date(2025, 9, 1), e: new Date(2025, 9, 31), cls: "hot" },
+  ];
+  const g = $("gantt");
+  const axis = document.createElement("div"); axis.className = "g-axis";
+  axis.innerHTML = `<div></div><div class="g-months"></div>`;
+  const months = axis.querySelector(".g-months");
+  const names = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  for (let m = 0; m < 24; m += 2) {
+    const d = new Date(2025, m, 15);
+    const s = document.createElement("span"); s.style.left = pct(d) + "%";
+    s.textContent = names[d.getMonth()] + " ’" + String(d.getFullYear()).slice(2); months.appendChild(s);
+  }
+  g.appendChild(axis);
+  const body = document.createElement("div"); body.className = "g-body"; g.appendChild(body);
+  rows.forEach((r, idx) => {
+    const row = document.createElement("div"); row.className = "g-row";
+    row.innerHTML = `<div class="g-name">${r.name}<small>${r.sub}</small></div><div class="g-track"></div>`;
+    const track = row.querySelector(".g-track");
+    if (r.m) { const d = document.createElement("div"); d.className = "g-mile"; d.style.left = pct(r.m) + "%"; track.appendChild(d); }
+    else {
+      const b = document.createElement("div"); b.className = "g-bar " + r.cls;
+      b.style.left = pct(r.s) + "%"; b.style.width = Math.max(pct(r.e) - pct(r.s), 1.2) + "%";
+      b.style.animationDelay = (idx * 0.12) + "s"; track.appendChild(b);
+    }
+    body.appendChild(row);
+  });
+  if (today >= start && today <= end) {
+    // today marker spans only the track column
+    const wrap = document.createElement("div");
+    wrap.style.cssText = "position:absolute;top:0;bottom:0;left:210px;right:0;pointer-events:none";
+    const t = document.createElement("div"); t.className = "g-today"; t.style.left = pct(today) + "%";
+    wrap.appendChild(t); body.appendChild(wrap);
+  }
+})();
+</script>
+</body>
+</html>
